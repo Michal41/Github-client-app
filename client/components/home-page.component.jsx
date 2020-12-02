@@ -1,10 +1,37 @@
 
-import React from 'react';
 
-const HomePage = () => (
-  <div>
-    Home page
-  </div>
-) 
+import React, { Component } from "react";
 
-export default HomePage;
+import { connect } from "react-redux";
+
+class HomePage extends Component {
+  
+  render() {
+    return (
+      <div className="App">
+        <div className="Age-label">
+          your age: <span>{this.props.age}</span>
+        </div>
+        <button onClick={this.props.onAgeUp}>Age UP</button>
+        <button onClick={this.props.onAgeDown}>Age Down</button>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    age: state.age
+  };
+};
+
+const mapDispachToProps = dispatch => {
+  return {
+    onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
+    onAgeDown: () => dispatch({ type: "AGE_DOWN", value: 1 })
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(HomePage);
