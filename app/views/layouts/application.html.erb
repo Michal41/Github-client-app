@@ -10,6 +10,10 @@
   </head>
 
   <body>
+    <%= redux_store("appStore", props: @react_props) %>;
+    
     <%= yield %>
+
+    <%= redux_store_hydration_data %> 
   </body>
 </html>
