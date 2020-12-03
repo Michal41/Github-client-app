@@ -9,28 +9,6 @@ import { helloSaga } from '../redux-saga/sagas'
 import createSagaMiddleware from 'redux-saga'
 
 
-const initialState = {
-  age: 20
-};
-
-const reducer = (state = initialState, action) => {
-  const newState = { ...state };
-
-  switch (action.type) {
-    case "AGE_UP_ASYNC":
-      newState.age += action.value;
-      break;
-
-    case "AGE_DOWN":
-      newState.age -= action.value;
-      break;
-  }
-  return newState;
-};
-
-
-
-
 
 
 
@@ -42,9 +20,31 @@ const action = type => store.dispatch({type})
 
 
 function appStore(props, railsContext) {
+  const sagaMiddleware = createSagaMiddleware()
+
+  const initialState = {
+    age: 20,
+    railsProps: props
+  };
+  
+  const reducer = (state = initialState, action) => {
+    const newState = { ...state };
+  
+    switch (action.type) {
+      case "AGE_UP_ASYNC":
+        newState.age += action.value;
+        break;
+  
+      case "AGE_DOWN":
+        newState.age -= action.value;
+        break;
+    }
+    return newState;
+  };
   
 
-  const sagaMiddleware = createSagaMiddleware()
+
+
   const store = createStore(
     reducer ,applyMiddleware(sagaMiddleware)
   )
