@@ -3,11 +3,12 @@
 import React, { Component } from "react";
 
 import { connect } from "react-redux";
+import Issue from "./issue.component";
+import NewIssueForm from "./new-isuue-form.component";
 
 class HomePage extends Component {
   
   render() {
-    console.log(this.props.repoName)
     return (
       <div className="App">
         <div className="Age-label">
@@ -21,6 +22,17 @@ class HomePage extends Component {
           <h1>
             Repository name : {this.props.repoName}
           </h1>
+          {this.props.issues.map(issue => (
+            <Issue 
+              key={issue.id}
+              title={issue.title}
+              body= {issue.body}  
+            />    
+            ))}
+
+
+            <NewIssueForm></NewIssueForm>
+
         </div>
       </div>
     );
