@@ -6,13 +6,21 @@ class GithubApiController < ApplicationController
   def index
     @veryfied_repo_name = @client.repos({}, query: {name:@repo_name}).first.name
     redux_store('appStore', props: { repo_name: @veryfied_repo_name, issues: @issues })
+    
   end
 
 
   def create
     @client.create_issue("#{@login}/#{@repo_name}", params[:title], params[:body])  
     redux_store('appStore', props: { repo_name: @veryfied_repo_name, issues: @issues })
-    
+    redirect_to root_path
+  end
+
+  def update
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @issues }
+    end
   end
 
   def init_github_client

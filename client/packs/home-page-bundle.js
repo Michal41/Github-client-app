@@ -27,15 +27,11 @@ function appStore(props, railsContext) {
   
   const reducer = (state = initialState, action) => {
     const newState = { ...state };
-  
+    
     switch (action.type) {
-
-      case "CREATE_ISSUE_SUCCES":
-        newState.railsProps.issues=
-          [...newState.railsProps.issues,{
-            title: action.value.title,
-            body: action.value.body,
-            id: Date.now()}]
+      
+      case "CREATE_ISSUE_SUCCES":  
+        newState.railsProps.issues=[...action.value]
         break;
     }
     return newState;
