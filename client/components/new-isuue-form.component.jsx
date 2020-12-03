@@ -1,6 +1,8 @@
 
 import React from 'react'
 
+import {connect} from "react-redux"
+
 class NewIssueForm extends React.Component{
   constructor(){
     super();
@@ -12,13 +14,19 @@ class NewIssueForm extends React.Component{
 
  handleChange = (e) => {
     this.setState({[e.target.name]:e.target.value})
+
  }
 
  handleSubmit = (e) => {
    e.preventDefault();
-   
- }
-  render(){
+
+  this.props.createIssue({title:this.state.title,body:this.state.body, id:Date.now()})
+  
+};
+  
+
+ 
+  render(){ 
     return(
       <form onSubmit={this.handleSubmit}>
         <input 
@@ -47,6 +55,12 @@ class NewIssueForm extends React.Component{
 
 }
 
+const mapDispachToProps = dispatch => {
+  return {
+    onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
+    onAgeDown: () => dispatch({ type: "AGE_DOWN", value: 1 }),
+    createIssue: (issue) => dispatch({ type: "CREATE_ISSUE", value: issue }),
+  };
+};
 
-
-export default NewIssueForm
+export default connect(null,mapDispachToProps)(NewIssueForm)

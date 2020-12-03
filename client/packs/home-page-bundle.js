@@ -4,7 +4,9 @@ import ReactOnRails from 'react-on-rails';
 import App from "../components/App"
 
 import { createStore, applyMiddleware } from 'redux'
+import {watchCreateIssue} from "../redux-saga/sagas"
 import {watchAgeUp} from "../redux-saga/sagas"
+
 import { helloSaga } from '../redux-saga/sagas'
 import createSagaMiddleware from 'redux-saga'
 
@@ -12,10 +14,9 @@ import createSagaMiddleware from 'redux-saga'
 
 
 
+import request from 'axios';
 
 
-
-const action = type => store.dispatch({type})
 
 
 
@@ -38,8 +39,17 @@ function appStore(props, railsContext) {
       case "AGE_DOWN":
         newState.age -= action.value;
         break;
+
+      case "CREATE_ISSUE_SUCCES":
+        newState.railsProps.issues=
+          [...newState.railsProps.issues,{
+            title: action.value.title,
+            body: action.value.body,
+            id: Date.now()}]
+        break;
     }
     return newState;
+    
   };
   
 
@@ -48,14 +58,10 @@ function appStore(props, railsContext) {
   const store = createStore(
     reducer ,applyMiddleware(sagaMiddleware)
   )
+  sagaMiddleware.run(watchCreateIssue);
 
-  sagaMiddleware.run(watchAgeUp)
 
-
-  const action = type => store.dispatch({type})
-  sagaMiddleware.run(watchAgeUp);
-
-  sagaMiddleware.run(watchAgeUp);
+  
 
 
   return store;
