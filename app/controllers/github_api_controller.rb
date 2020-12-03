@@ -1,33 +1,25 @@
 class GithubApiController < ApplicationController
   include ReactOnRails::Controller
+  before_action :init_github_client
+  
   
   def index
-    redux_store('appStore', props: { foo: 'bar' })
-    
-
-    repo_name = "test3"
-    login = client.user.login
-    
-    @veryfied_repo_name = client.repos({}, query: {name:repo_name}).first.name
-    @single_issue = client.issue("#{login}/#{repo_name}",2).body
-    cl = client.list_issues("#{login}/#{repo_name}").map { |el| {el:el} }
-
-
-    @issues = client.list_issues("#{login}/#{repo_name}")
-      .map { |element|  {title:element.title, body:element.body, id:element.id}}
-
-
+    @veryfied_repo_name = @client.repos({}, query: {name:@repo_name}).first.name
     redux_store('appStore', props: { repo_name: @veryfied_repo_name, issues: @issues })
-
   end
 
 
   def create
-        
-    puts params[:title]
-
+    @client.create_issue("#{@login}/#{@repo_name}", params[:title], params[:body])  
+    redux_store('appStore', props: { repo_name: @veryfied_repo_name, issues: @issues })
+    
   end
 
-
-
+  def init_github_client
+    @client ||= Octokit::Client.new(:access_token => Figaro.env.github_personal_acces_key)
+    @login = @client.user.login
+    @repo_name = Figaro.env.github_repo_name
+    @issues||= @client.list_issues("#{@login}/#{@repo_name}",options = {direction:"asc"})
+    .map { |element|  {title:element.title, body:element.body, id:element.id}}
+  end
 end
