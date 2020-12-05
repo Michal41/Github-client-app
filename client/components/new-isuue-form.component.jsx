@@ -57,8 +57,6 @@ class NewIssueForm extends React.Component{
 
 const mapDispachToProps = dispatch => {
   return {
-    onAgeUp: () => dispatch({ type: "AGE_UP", value: 1 }),
-    onAgeDown: () => dispatch({ type: "AGE_DOWN", value: 1 }),
     createIssue: (issue) => dispatch({ type: "CREATE_ISSUE", value: issue }),
   };
 };

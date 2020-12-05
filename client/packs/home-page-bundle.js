@@ -4,7 +4,7 @@ import ReactOnRails from 'react-on-rails';
 import App from "../components/App"
 
 import { createStore, applyMiddleware } from 'redux'
-import {watchCreateIssue} from "../redux-saga/sagas"
+import {watchCreateIssue, watchCloseIssue} from "../redux-saga/sagas"
 
 import createSagaMiddleware from 'redux-saga'
 
@@ -27,10 +27,8 @@ function appStore(props, railsContext) {
   
   const reducer = (state = initialState, action) => {
     const newState = { ...state };
-    
     switch (action.type) {
-      
-      case "CREATE_ISSUE_SUCCES":  
+      case "UPDATE_ISSUES_LIST":  
         newState.railsProps.issues=[...action.value]
         break;
     }
@@ -45,6 +43,8 @@ function appStore(props, railsContext) {
     reducer ,applyMiddleware(sagaMiddleware)
   )
   sagaMiddleware.run(watchCreateIssue);
+  sagaMiddleware.run(watchCloseIssue);
+
 
 
   
