@@ -1,10 +1,7 @@
 
 import React from 'react'
 import { Provider } from "react-redux";
-
 import HomePage from "./home-page.component"
-
-
 
 
 class App extends React.Component{
@@ -14,7 +11,7 @@ class App extends React.Component{
   render(){
     return(
       <Provider store={ReactOnRails.getStore("appStore")}>
-        <HomePage props={this.props}/>
+        <HomePage />
       </Provider>
     )
   }

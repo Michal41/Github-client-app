@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import React from 'react';
 
 
-
 const Issue = ({...props}) => {
   const {title, body,closeIssue, id} = props
   return(

@@ -1,0 +1,7 @@
+const ActionTypes = {
+  CLOSE_ISSUE : "CLOSE_ISSUE",
+  CREATE_ISSUE: "CREATE_ISSUE",
+  UPDATE_ISSUES_LIST : "UPDATE_ISSUES_LIST",
+  CLOSE_ISSUE_ERROR: "CLOSE_ISSUE_ERROR"
+}
+export default ActionTypes;
