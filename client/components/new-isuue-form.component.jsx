@@ -28,28 +28,39 @@ class NewIssueForm extends React.Component{
  
   render(){ 
     return(
-      <form onSubmit={this.handleSubmit}>
-        <input 
-          type="text"
-          name="title" 
-          placeholder="title here"
-          value={this.state.title}
-          onChange={this.handleChange}
-        />
-        <input 
-          type="textArea"
-          name="body"
-          placeholder="body here"
-          value={this.state.body}
-          onChange={this.handleChange}
+      <div className="center w-70"> 
+        <form onSubmit={this.handleSubmit}>
+          <input 
+            type="text"
+            name="title" 
+            placeholder="title here"
+            value={this.state.title}
+            onChange={this.handleChange}
+            className="b pa2 mt2 input-reset ba bg-transparent 
+            black-60 hover-black border-color-dark-gray2"
+          />
+          <input 
+            type="textArea"
+            name="body"
+            placeholder="body here"
+            value={this.state.body}
+            onChange={this.handleChange}
+            className="b pa2 input-reset ba bg-transparent 
+            black-60 hover-black  border-color-dark-gray2"
 
-        />
-        <button 
-          type="submit"
-        >
-          Create Issue
-        </button>
-    </form>
+
+          />
+          <button 
+            className='tc ml3-l ml0 b ph2 pv2 ba border-color-dark-gray2 
+            white bg-transparent grow pointer f5 shadow-2 
+            br1 bg-color-dark-gray2'
+            
+            type="submit"
+          > 
+            Create Issue
+          </button>
+      </form>
+    </div>  
     )
   }
 

@@ -6,12 +6,31 @@ import React from 'react';
 const Issue = ({...props}) => {
   const {title, body,closeIssue, id} = props
   return(
-    <div style={{height:"200px", marginLeft:"auto", marginRight:"auto", 
-          width:"450px", border:"solid", marginBottom:"7px", borderRadius:".25rem"}}>
-      <div style={{fontSize:"2rem", fontWeight:"bold"}}>{title}</div>
-      <div style={{textAlign:"center"}}> {body} </div>
-      <button onClick={() => closeIssue(id)}> Close this Issue </button>
+    
+    <div>
+      <div className="fr w-100 bg-white border-color-dark-blue2 
+        mt0 br2 shadow-2 bb black hover-bg-light-gray">
+
+        <div className="fl w-30 black--70 pl2 pv3 f6 b--white-40 tc">
+          {title}
+        </div>
+
+        <div className="fl w-50 black--70 pl2 pv3 f6 b--white-40 tc">
+          {body}
+        </div>
+
+        <div className="fl w-20 black--70 pl2 pv3 f6  b--white-40 tc">
+          <button 
+          className='tc ml3-l ml0 b ph2 pv2 ba 
+          border-color-dark-gray2 white bg-transparent grow 
+          pointer f5 dib shadow-2 br1 bg-color-dark-gray2 w-80'
+          onClick={() => closeIssue(id)}
+          > Close this Issue </button>
+        </div>
+      
+      </div>
     </div>
+    
 )}
 
 
