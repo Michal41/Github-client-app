@@ -9,7 +9,7 @@
     "id": 757759393,
     "node_id": "MDU6SXNzdWU3NTc3NTkzOTM=",
     "number": 15,
-    "title": "a",
+    "title": "title_of_issue",
     "user": {
       "login": "github_user",
       "id": 67971678,
@@ -46,7 +46,7 @@
     "closed_at": null,
     "author_association": "OWNER",
     "active_lock_reason": null,
-    "body": "v",
+    "body": "body_of_issue",
     "performed_via_github_app": null
   },
   {

@@ -1,6 +1,8 @@
 require 'webmock/rspec'
 require 'sinatra/base'
 
+
+
 RSpec.configure do |config|
   config.before(:each) do
     stub_request(:any, /api.github.com/).to_rack(FakeGitHub)
@@ -9,12 +11,17 @@ end
 
 
 
-require 'sinatra/base'
-
 class FakeGitHub < Sinatra::Base
 
   get "/repos/github_user/repo_name/issues" do
     json_response 200, 'issues.json'
+  end
+
+
+  post "/repos/github_user/repo_name/issues" do
+    if ("Amazon"!=request.body.read.to_s.split(",")[1].split(":")[1].gsub("\"",""))
+      raise "Wrong body exeption"
+    end
   end
 
   private
@@ -123,4 +130,6 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+
 end
